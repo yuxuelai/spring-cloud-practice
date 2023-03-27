@@ -1,0 +1,34 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # 匹配所有请求
+            allowedOrigins: "*" #跨域处理 允许所有的域
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
+              - PUT
+              - DELETE
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+      # 使用动态路由需要将uri改成服务名称
+      routes:
+        - id : payment_routh
+          uri: lb://custume-back-project
+          predicates:  # 断言 路径相匹配进行路由
+            - Path=/back/**
+
+        - id: payment_routh2
+          uri: lb://custume-back-project
+          predicates:
+            - Path=/login/**
+

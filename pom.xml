@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>spring-cloud-back</module>
+        <module>spring-cloud-gateway9527</module>
     </modules>
     <packaging>pom</packaging>
 
