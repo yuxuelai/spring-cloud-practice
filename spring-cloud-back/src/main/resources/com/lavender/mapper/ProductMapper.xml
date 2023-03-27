@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lavender.mapper.ProductMapper">
+    <!--    增加一个 User-->
+    <insert id="add" parameterType="com.lavender.pojo.ProductModel">
+        insert into `product` (`id`,`name`,`content`,`clothName`,`marketPrice`,`enable`,`file`,`imghref`)
+        values (#{id},#{name},#{content},#{clothName},#{marketprice},#{enable},#{file},#{imgHref})
+    </insert>
+
+    <!--    根据id删除一个User-->
+    <delete id="delete" >
+        delete from `product` where id=#{id}
+    </delete>
+
+    <!--    更新User-->
+    <update id="update" parameterType="com.lavender.pojo.ProductModel">
+        update `product` set clothName = #{clothName} , `imghref`=#{imgHref},marketPrice = #{marketprice} , file = #{file},content = #{content},enable=#{enable},updateTime=#{updatetime}
+        where id = #{id}
+    </update>
+
+    <!--    根据id查询 返回一个User-->
+    <select id="findById" resultType="com.lavender.pojo.ProductModel">
+        select `marketprice`,`imghref` ,`content`,`isshow`,`isrecommend`,`clothName`,`enable`,
+               `whereshow`,`name` from `product` where id=#{id}
+    </select>
+
+    <!--    查询全部User-->
+    <select id="findAll" resultType="com.lavender.pojo.ProductModel">
+        select `id`,`marketprice`,`imghref` ,`content`,`isshow`,`isrecommend`,`clothName`,`enable`,
+               `whereshow`,`name`
+        from `product` where 1=1 order by id desc
+    </select>
+
+    <!--    查询全部User-->
+    <select id="find" resultType="com.lavender.pojo.ProductModel">
+        select `id`,`marketprice`,`imghref` ,`content`,`isshow`,`isrecommend`,`clothName`,`enable`,
+               `whereshow`,`name`
+        from `product` where 1=1 order by id desc
+    </select>
+
+
+
+    <!--    新增搜索功能 -->
+    <!--    <select id="queryBookByName" resultType="com.lavender.pojo.Books">-->
+    <!--        select * from ssmbook.books where bookName=#{bookName}-->
+    <!--    </select>-->
+</mapper>
+

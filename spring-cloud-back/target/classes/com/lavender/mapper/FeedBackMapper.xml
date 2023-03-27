@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lavender.mapper.FeedBackMapper">
+    <!--    增加一个 FeedBack-->
+    <insert id="add" parameterType="com.lavender.pojo.FeedbackModel">
+        insert into feedback (`bookName`,`bookCounts`,`detail`)
+        values (#{bookName},#{bookCounts},#{detail})
+    </insert>
+
+    <!--    根据id删除一个FeedBack-->
+    <delete id="delete">
+        delete from `feedback` where id=#{id}
+    </delete>
+
+    <!--    更新FeedBack-->
+    <update id="update" parameterType="com.lavender.pojo.FeedbackModel">
+        update `feedback` set bookName =#{bookName} , bookCounts=#{bookCounts} , detail=#{detail}
+        where bookID = #{bookID}
+    </update>
+
+    <!--    根据id查询 返回一个FeedBack-->
+    <select id="findById" resultType="com.lavender.pojo.FeedbackModel">
+        select * from `feedback` where id=#{id}
+    </select>
+
+    <!--    查询全部FeedBack-->
+    <select id="find" resultType="com.lavender.pojo.FeedbackModel">
+        select * from `feedback` where 1=1 order by id desc
+    </select>
+
+
+
+    <!--    新增搜索功能 -->
+    <!--    <select id="queryBookByName" resultType="com.lavender.pojo.Books">-->
+    <!--        select * from ssmbook.books where bookName=#{bookName}-->
+    <!--    </select>-->
+</mapper>
+

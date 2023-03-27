@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.lavender.mapper.UserMapper">
+    
+<!--    <resultMap id="userMap" type="com.lavender.pojo.UserModel">-->
+<!--        <result property="id" column="id"/>-->
+<!--        <result property="createTime" column="createdate"/>-->
+<!--        <result property="updateTime" column="updatedate"/>-->
+<!--        <result property="enable" column="enable"/>-->
+<!--        <result property="username" column="username"/>-->
+<!--        <result property="repassword" column="repassword"/>-->
+<!--        <result property="password" column="password"/>-->
+<!--        <result property="newPassword" column="newpassword"/>-->
+<!--        <result property="birthdayStart" column="birthdaystart"/>-->
+<!--        <result property="birthdayEnd" column="birthdayend"/>-->
+<!--        <result property="updateTimeStart" column="updatetimestart"/>-->
+<!--        <result property="updateTimeEnd" column="updatetimeend"/>-->
+
+<!--    </resultMap>-->
+    
+    <!--    增加一个 User-->
+    <insert id="add" parameterType="com.lavender.pojo.UserModel" >
+        insert into myproject.user (`id`,`username`,`address`,`createdate`,`email`,
+                                    `enable`,`password`,`phone`,`gender`,`updatedate`,`hobby`,`birthday`,`remark`)
+        values (#{id},#{username},#{address},#{createTime},#{email},
+                #{enable},#{password},#{phone},#{gender},#{updateTime},
+                #{hobby},#{birthday},#{remark})
+
+    </insert>
+
+
+    <!--    根据id删除一个User-->
+    <delete id="delete"  >
+        delete from `user` where id=#{id}
+    </delete>
+
+    <!--    更新User-->
+    <update id="update" parameterType="com.lavender.pojo.UserModel">
+        update `user` set username=#{username},address=#{address},email=#{email},
+        enable=#{enable},phone=#{phone},gender=#{gender},hobby=#{hobby},birthday=#{birthday},updatedate=#{updateTime} where id=#{id}
+<!--        <set>-->
+<!--            <if test="username!=null">-->
+<!--                username=#{username}-->
+<!--            </if>-->
+
+<!--            <if test="address!=null">-->
+<!--                address=#{address}-->
+<!--            </if>-->
+<!--            <if test="email!=null">-->
+<!--                email=#{email}-->
+<!--            </if>-->
+<!--            <if test="enable!=enable">-->
+<!--                enable=#{enable}-->
+<!--            </if>-->
+<!--            <if test="phone!=null">-->
+<!--                phone=#{phone}-->
+<!--            </if>-->
+<!--            <if test="gender!=null">-->
+<!--                gender=#{gender}-->
+<!--            </if>-->
+<!--            <if test="hobby!=null">-->
+<!--                hobby=#{hobby}-->
+<!--            </if>-->
+
+<!--            <if test="birthday!=null">-->
+<!--                birthday=#{birthday}-->
+<!--            </if>-->
+
+<!--            <if test="updateTime!=null">-->
+<!--                updatedate=#{updateTime}-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id=#{id}-->
+
+    </update>
+
+    <update id="updatePassword">
+
+    </update>
+
+    <!--    根据id查询 返回一个User-->
+    <select id="findById" resultType="com.lavender.pojo.UserModel" parameterType="com.lavender.pojo.UserModel">
+        select * from `user` where id=#{id}
+    </select>
+<!--    `id`,`username`,`phone`,`gender`,`hobby` ,`createdate`,`updatedate`,`email`,`birthday`-->
+
+    <!--    查询全部User-->
+    <select id="findAll" resultType="com.lavender.pojo.UserModel">
+        select * from `user` where 1=1 order by id desc
+<!--        <where>-->
+<!--            <if test="username!=null">-->
+<!--               and `username` like concat('%',#{username},'%')-->
+<!--            </if>-->
+<!--            <if test="createtime!=null and  updatedate==null">-->
+<!--                and `createtime` &gt;=#{updatedate}-->
+<!--            </if>-->
+
+<!--            <if test="createtime!=null and  updatedate!=null">-->
+<!--                and `createtime` between ;=#{updatedate}-->
+<!--            </if>-->
+
+<!--            <if test="createtime== null and  updatedate!=null">-->
+<!--                and `createtime` &lt;=#{updatedate}-->
+<!--            </if>-->
+
+<!--            <if test="gender!=''">-->
+<!--                and `gender` = #{gender}-->
+<!--            </if>-->
+
+<!--            <if test="hobby!=null">-->
+<!--                and `hobby` like concat('%',#{hobby},'%')-->
+<!--            </if>-->
+
+<!--            <if test="enable!=-1">-->
+<!--               and  enable=#{enable}-->
+<!--            </if>-->
+
+<!--        </where>-->
+--         order by id desc
+<!--        <bind name="page" value="(page-1)*limit"/>-->
+<!--        limit #{page},#{limit}-->
+
+    </select>
+
+    <select id="findByUsernameAndPassword" resultType="com.lavender.pojo.UserModel">
+        select * from `user` where username=#{username} and password=#{password}
+
+    </select>
+
+    <select id="findByUsername" resultType="com.lavender.pojo.UserModel">
+        select * from `user` where username=#{username}
+
+    </select>
+    <select id="getUserByName" resultType="com.lavender.pojo.UserModel">
+        select * from  `user` where  username =#{username}
+
+
+    </select>
+
+    <select id="getPermissionByUserId" resultType="com.lavender.pojo.Permission">
+        SELECT * FROM (SELECT permission_id from role_permission_relation as rpr INNER JOIN user_role_relation as urr
+                       where rpr.role_id= urr.role_id and urr.admin_id = #{id})
+                          as rs INNER JOIN permission as wxp on
+            wxp.id = rs.permission_id;
+
+    </select>
+
+
+</mapper>
+
