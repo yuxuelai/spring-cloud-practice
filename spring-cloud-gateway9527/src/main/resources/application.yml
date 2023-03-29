@@ -34,6 +34,11 @@ spring:
           predicates:
             - Path=/login/**
 
+        - id: payment_routh3
+          uri: http://localhost:8084
+          predicates:
+            - Path=/file/upload
+
 
       default-filters:
         - DedupeResponseHeader=Vary Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
