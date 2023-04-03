@@ -10,7 +10,7 @@ import java.util.Base64;
 public class JwtUtil {
 
     // 有效期 一个小时
-    public static final Long JWT_TTL=3600000L;
+//    public static final Long JWT_TTL=3600000L;
 
     // 设置秘钥明文
     static String secretKey = "lavender-serendipity";
@@ -35,13 +35,7 @@ public class JwtUtil {
      * @return
      * @throws Exception
      */
-//    public static Claims parseJWT(String jwt) throws Exception {
-//        SecretKey secretKey = generalKey();
-//        return Jwts.parser()
-//                .setSigningKey(secretKey)
-//                .parseClaimsJws(jwt)
-//                .getBody();
-//    }
+
 
     public static Claims getClaimsFromToken(String token) {
 

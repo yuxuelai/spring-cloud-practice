@@ -11,21 +11,23 @@ spring:
           '[/**]': # 匹配所有请求
             allowedOrigins: "*" #跨域处理 允许所有的域
             allowedHeaders: "*"
-            allowedMethods: "*"
-
-#              - GET
-#              - POST
-#              - PUT
-#              - DELETE
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
 
+
+
       # 使用动态路由需要将uri改成服务名称
       routes:
         - id : payment_routh
           uri: http://localhost:8084
+
           predicates:  # 断言 路径相匹配进行路由
             - Path=/back/**
 
@@ -42,6 +44,11 @@ spring:
 
       default-filters:
         - DedupeResponseHeader=Vary Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+
+
+
+
+
 
 
 

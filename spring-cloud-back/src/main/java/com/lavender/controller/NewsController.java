@@ -3,6 +3,7 @@ package com.lavender.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lavender.pojo.NewsModel;
+import com.lavender.pojo.NewsTypeModel;
 import com.lavender.pojo.ResultModel;
 import com.lavender.service.NewsService;
 import io.swagger.annotations.Api;
@@ -46,7 +47,12 @@ public class NewsController {
     @RequestMapping("/back/news/all")
     @ResponseBody
     public String newsFindAll(NewsModel newsModel){
+        NewsTypeModel newsTypeModel = new NewsTypeModel ();
         ResultModel all = newsService.findAll (newsModel);
+
+        ResultModel newsTypeAll = newsService.findNewsTypeAll (newsTypeModel);
+
+        Object data = newsTypeAll.getData ();
 
         return JSONObject.toJSONString (all);
 

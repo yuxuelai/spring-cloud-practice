@@ -11,5 +11,6 @@ public class GateWayMain9527 {
 
         SpringApplication.run(GateWayMain9527.class,args);
 
+
     }
 }

@@ -1,0 +1,88 @@
+
+# 配置端口号
+server:
+  port: 11223
+
+
+#JWT配置
+jwt:
+  # JWT存储的请求头
+  tokenHeader: Authorization
+  # JWT 加密使用的密钥
+  secret: lavender-serendipity
+  # JWT 超期限时间(60*60*24)
+  expiration: 604800
+  # JWT负载中拿到开头
+  tokenHead: Bearer
+
+
+
+#配置spring mvc文件
+#配置数据库链接 配置连接池
+spring:
+
+  redis:
+    #    这里表示选择第几号库
+    database: 3
+    host: localhost
+    port: 6379
+    #    password: 1234
+    timeout: 5000
+
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/myproject?useSSL=true&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 1234
+
+
+
+  #配置文件上传的大小
+  servlet:
+    multipart:
+      #上传文件的最大值
+      max-file-size: 15MB
+      #请求文件的最大值
+      max-request-size: 15MB
+
+  rabbitmq:
+    virtual-host: /
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  application:
+    name: service-provider
+
+  cloud:
+    #    nacos:
+    #      discovery:
+    #        server-addr: localhost:8848
+
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+#配置mybatis
+mybatis:
+  #  目录地址
+  #  mapper-locations: classpath:/resources/mapper/*.xml
+  #  type-aliases-package: "com.lavender.pojo"
+  #  configuration:
+  map-underscore-to-camel-case: true
+
+
+
+
+
